@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
   resources :rooms do
     resources :bookings, only: [:create]
+    collection do
+      get :available
+    end
   end
 
   resources :users, only: [] do

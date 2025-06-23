@@ -24,4 +24,19 @@ class Room < ApplicationRecord
               .select(:room_id)
     )
   }
+
+  scope :available_on, lambda { |start_at, end_at|
+    where.not(
+      id: Booking.where('(start_at, end_at) OVERLAPS (?, ?)', start_at, end_at)
+    )
+  }
+
+  scope :with_equipments, lambda { |equipment_ids|
+    return all if equipment_ids.blank?
+
+    joins(:equipments)
+      .where(equipment: { id: equipment_ids })
+      .group('rooms.id')
+      .having('COUNT(DISTINCT equipment.id) = ?', equipment_ids.uniq.size)
+  }
 end
