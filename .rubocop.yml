@@ -1,0 +1,13 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/seeds.rb'
+    - 'config/*'
+    - 'config/environments/development.rb'
+    - 'config/environments/production.rb'
+    - 'config/environments/test.rb'
+    - 'bin/*'
+    - 'Gemfile'
+Style/Documentation:
+  Enabled: false
