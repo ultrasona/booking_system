@@ -13,4 +13,6 @@
 class User < ApplicationRecord
   validates :email, presence: true
   validates :name, presence: true
+
+  has_many :bookings, dependent: :destroy
 end
